@@ -14,7 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Add Number of questions solved out of 15, X/15
+# Add Number of questions solved out of 15, X/15
 
 # Questions
 
@@ -50,7 +50,7 @@ Final Exam worth 30%
 
 ## Question 2
 
-### 2a
+### a.
 
 ```{r}
 ddt = read.csv("DDT.csv")
@@ -58,28 +58,28 @@ m=with(ddt, as.numeric(factor(MILE)))
 coplot(LENGTH~WEIGHT|RIVER*SPECIES, col=m, data=ddt)
 ```
 
-### 2b
+### b
 
 The lower left three plots show the length vs weight plots for CCatfish in the 
 FCM, LCM and SCM rivers from left to right respectively. 
 
-### 2c
+### c
 
 Line A uses the as.numeric function to convert the vector MILE to numeric values.
 The factor function factors the miles in order to reduce how many different 
 possible values exist. This keeps the colors on the graph more uniform.
 
-### 2d
+### d
 
 Line B simply outputs how many unique values exist in m, which are the numbers 
 produced from line A.
 
-### 2e
+### e
 
 The top 6 plots are empty because there aren't any LMBass or SMBuffalo in rivers
 other than TRM. So no data plots belong in those boxes. 
 
-### 2f
+### f
 
 ```{r}
 fcm_cat = subset(ddt, RIVER=="FCM" & SPECIES=="CCATFISH",)
@@ -104,13 +104,13 @@ g. Route type (interstate, U.S., state, county, or city) QUALITATIVE
 
 ## Question 4
 
-a. 
+### a. 
 
 Simple: Simple Random Sample
 
 Complex: stratified random sampling, cluster sampling, and systematic sampling
 
-b.
+### b.
 
 Simple Random Sample: A sample selected from a population in a way that every
 different sample size has an equal chance of selection.
@@ -156,33 +156,33 @@ median(eq$MAG)
 
 ## Question 7
 
-#### (a) What is the data collection method? 
+### a. What is the data collection method? 
 
 Stratified Random Sample
 
-#### (b) What is the population?
+### b. What is the population?
 
 All the fish in the Tennessee River and its tributaries.
 
-#### (c) Give the names of all the qualitative variables.
+### c. Give the names of all the qualitative variables.
 
 River and Species
 
 ## Question 8
 
+### a. 
 
-Use pareto() Hint: freq=c(15,8,63,20)
-RL=c("None","Both","LegsO","WheelsO")
-l=rep(RL,freq)
+Bar Plot
 
+### b. 
 
-a. Bar Plot
+The variable is if the robot had legs, wheels, both or not. 
 
-b. The variable is if the robot had legs, wheels, both or not. 
+### c. 
 
-c. The main design is legs only.
+The main design is legs only.
 
-d. 
+### d. 
 
 ```{r}
 freq=c(15,8,63,20)
@@ -191,7 +191,7 @@ l=rep(RL,freq)
 l
 ```
 
-e.
+### e.
 
 ```{r}
 
@@ -215,7 +215,8 @@ pareto(l)
 
 ## Question 9
 
-a.
+### a.
+
 ```{r}
 freq2=c(32, 6, 12)
 RL2=c("Windows","Explorer","Office")
@@ -225,7 +226,7 @@ pie(freq2, labels = RL2)
 
 Explorer had the lowest proportion of security issues in 2012.
 
-b.
+### b.
 
 ```{r}
 freq2=c(6, 8, 22, 3, 11)
@@ -275,7 +276,7 @@ relative_freq
 
 ## Question 12
 
-### Maybe change this?
+# Maybe change this?
 
 ```{r}
 rough = c(1.72, 2.50, 2.16, 2.13, 1.06, 2.24, 2.31, 2.03, 1.09, 1.40, 2.57, 2.64, 1.26, 2.05, 1.19, 2.13, 1.27, 1.51, 2.41, 1.95)
@@ -308,6 +309,7 @@ I would recommend the median to describe the central tendency because the mean i
 The mean is not an accurate representation of the data's middle ground.
 
 ### c.
+
 ```{r}
 library(dplyr)
 gob2 = within(gobi, 
@@ -335,5 +337,59 @@ getmode(desert$PlantCov)
 The center of the total plant coverage does appear to be different at the two regions. The coverage in the Gobi Desert is much lower than the coverage in the Dry Steppe. 
 
 
+## Question 14
 
+### a.
+
+```{r}
+galaxy = read.csv("GALAXY2.csv", header = TRUE)
+sp = with(ddt, galaxy$VELOCITY)
+
+summary(galaxy)
+
+hist(galaxy$VELOCITY, main="Histogram of Veloctiy", xlab="Velocity")
+
+```
+
+The values of velocity range from 18499 to 24909. The median is 22355 and the mean is 21448. The histogram shows that move rescorded velocities were between 19,000 and 20,000 and between 22,000 and 23,000.
+
+### b.
+
+The histogram does support a double cluster theory due to having two separate ranges with high frequencies, instead of being a uniform graph.
+
+### c.
+
+```{r}
+print("First Cluster")
+A1775A <- filter(galaxy, VELOCITY < 21000)
+mean(A1775A$VELOCITY)
+median(A1775A$VELOCITY)
+getmode(A1775A$VELOCITY)
+
+print("Second Cluster")
+A1775B <- filter(galaxy, VELOCITY >= 21000)
+mean(A1775B$VELOCITY)
+median(A1775B$VELOCITY)
+getmode(A1775B$VELOCITY)
+```
+### d.
+
+If the velocity is 20,000 km/s then it is most likely to belong to cluster A1775A. This is because that cluster's mean and median are both about 19,400 which is much closer than cluster B's.
+
+
+## Question 15
+
+```{r}
+library(ggplot2)
+
+ddt = read.csv("DDT.csv")
+library(ggplot2)
+
+g <- ggplot(data = ddt, aes(x = RIVER, y = LENGTH, fill = SPECIES, given = RIVER))
+g <- g + geom_boxplot()
+g <- g + ggtitle("Eid Zaben")
+g
+
+
+```
 

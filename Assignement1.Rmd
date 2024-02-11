@@ -1,0 +1,18 @@
+---
+title: "Assignment 1: MATH 4753"
+author: "Eid Zaben"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+    theme: spacelab
+    highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Add Number of questions solved out of 15, X/15
+

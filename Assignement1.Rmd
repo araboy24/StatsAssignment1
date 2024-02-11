@@ -16,3 +16,324 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Add Number of questions solved out of 15, X/15
 
+# Questions
+
+## Question 1
+
+This course has no curves and the final grades for this course are as follows:
+
+A: >= 90%
+
+B: >= 80% and < 90%
+
+C:  >= 60% and < 80%
+
+D:  >= 50% and < 60%
+
+F:  < 50%
+
+The breakdown of the grades are:
+
+4 Assignments worth 15% Total
+
+About 16 Laboratories worth 10% Total
+
+Projects worth 10% Total
+
+In class quizzes worth 10% Total
+
+Chapter online quizzes worth 5%
+
+Midterm exams worth 20% Total
+
+Final Exam worth 30%
+
+## Question 2
+
+### 2a
+
+```{r}
+ddt = read.csv("DDT.csv")
+m=with(ddt, as.numeric(factor(MILE)))
+coplot(LENGTH~WEIGHT|RIVER*SPECIES, col=m, data=ddt)
+```
+
+### 2b
+
+The lower left three plots show the length vs weight plots for CCatfish in the 
+FCM, LCM and SCM rivers from left to right respectively. 
+
+### 2c
+
+Line A uses the as.numeric function to convert the vector MILE to numeric values.
+The factor function factors the miles in order to reduce how many different 
+possible values exist. This keeps the colors on the graph more uniform.
+
+### 2d
+
+Line B simply outputs how many unique values exist in m, which are the numbers 
+produced from line A.
+
+### 2e
+
+The top 6 plots are empty because there aren't any LMBass or SMBuffalo in rivers
+other than TRM. So no data plots belong in those boxes. 
+
+### 2f
+
+```{r}
+fcm_cat = subset(ddt, RIVER=="FCM" & SPECIES=="CCATFISH",)
+mean(fcm_cat$DDT)
+```
+
+## Question 3
+
+a. Length of maximum span (feet) QUANTITATIVE
+
+b. Number of vehicle lanes QUANTITATIVE
+
+c. Toll bridge (yes or no) QUALITATIVE
+
+d. Average daily traffic QUANTITATIVE
+
+e. Condition of deck (good, fair, or poor) QUALITATIVE
+
+f. Bypass or detour length (miles) QUANTITATIVE
+
+g. Route type (interstate, U.S., state, county, or city) QUALITATIVE
+
+## Question 4
+
+a. 
+
+Simple: Simple Random Sample
+
+Complex: stratified random sampling, cluster sampling, and systematic sampling
+
+b.
+
+Simple Random Sample: A sample selected from a population in a way that every
+different sample size has an equal chance of selection.
+
+Stratified random sampling: Used when the samples can be split up based on 
+certain strata that can help to see categorical similarities.
+
+cluster sampling: This is used when it's more logical to sample natural 
+groupings experimental units first, then collect data from all experimental units
+within a cluster.
+
+systematic sampling: Involves systematically selecting every k-th experimental 
+unit from a list of all experimental units. 
+
+## Question 5
+
+```{r}
+mtbe = read.csv("MTBE.csv")
+ind = sample(1:223, 5, replace=FALSE)
+mtbe[ind,]
+```
+
+```{r}
+mtbeo = na.omit(mtbe)
+depth=mtbeo[mtbeo$Aquifier=="Bedrock",]$Depth 
+sd(depth)
+```
+
+## Question 6
+
+```{r}
+eq = read.csv("EARTHQUAKE.csv")
+# dim(eq)
+indEq = sample(1:2929, 30, replace=FALSE)
+eq[indEq,]
+```
+
+```{r}
+plot(ts(eq$MAG))
+median(eq$MAG)
+```
+
+
+## Question 7
+
+#### (a) What is the data collection method? 
+
+Stratified Random Sample
+
+#### (b) What is the population?
+
+All the fish in the Tennessee River and its tributaries.
+
+#### (c) Give the names of all the qualitative variables.
+
+River and Species
+
+## Question 8
+
+
+Use pareto() Hint: freq=c(15,8,63,20)
+RL=c("None","Both","LegsO","WheelsO")
+l=rep(RL,freq)
+
+
+a. Bar Plot
+
+b. The variable is if the robot had legs, wheels, both or not. 
+
+c. The main design is legs only.
+
+d. 
+
+```{r}
+freq=c(15,8,63,20)
+RL=c("None","Both","LegsO","WheelsO")
+l=rep(RL,freq)
+l
+```
+
+e.
+
+```{r}
+
+pareto <- function(x, mn = "Pareto barplot", ...) {  # x is a vector
+  x.tab = table(x)
+  xx.tab = sort(x.tab, decreasing = TRUE, index.return = FALSE)
+  cumsum(as.vector(xx.tab)) -> cs
+  length(x.tab) -> lenx
+  bp <- barplot(xx.tab, ylim = c(0,max(cs)),las = 2)
+  lb <- seq(0,cs[lenx], l = 11)
+  axis(side = 4, at = lb, labels = paste(seq(0, 100, length = 11), "%", sep = ""), las = 1, line = -1, col = "Blue", col.axis = "Red")
+  for(i in 1:(lenx-1)){
+    segments(bp[i], cs[i], bp[i+1], cs[i+1], col = i, lwd = 2)
+  }
+  title(main = mn, ...)
+}
+
+
+pareto(l)
+```
+
+## Question 9
+
+a.
+```{r}
+freq2=c(32, 6, 12)
+RL2=c("Windows","Explorer","Office")
+l2=rep(RL2,freq2)
+pie(freq2, labels = RL2)
+```
+
+Explorer had the lowest proportion of security issues in 2012.
+
+b.
+
+```{r}
+freq2=c(6, 8, 22, 3, 11)
+RL2=c("DOS","Info Disclosure","Remote Code Execution","Spoofing", "Privilege elevation")
+l2=rep(RL2,freq2)
+pareto(l2)
+```
+
+
+Based on these results, I'd advise Microsoft to tackle Remote Code Execution. 
+
+## Question 10
+
+```{r}
+library(plotrix)
+swd=read.csv("SWDEFECTS.csv", header=TRUE) 
+head(swd)
+library(plotrix) 
+tab=table(swd$defect) 
+rtab=tab/sum(tab) 
+round(rtab,2)
+pie3D(rtab,labels=list("OK","Defective"),main="pie plot of SWD")
+```
+
+According to the pie chart, there is only a 10% of chance of software having defective code within it. 
+
+## Question 11
+
+### Problem 2.72
+
+# Come back to 11
+
+a. 
+
+```{r}
+volt = read.csv("VOLTAGE.csv")
+head(volt)
+counts <- table(volt$VOLTAGE)
+
+# Step 2: Calculate the relative frequency for each category
+relative_freq <- prop.table(counts)
+relative_freq
+# v = 
+# hist()
+```
+
+
+## Question 12
+
+### Maybe change this?
+
+```{r}
+rough = c(1.72, 2.50, 2.16, 2.13, 1.06, 2.24, 2.31, 2.03, 1.09, 1.40, 2.57, 2.64, 1.26, 2.05, 1.19, 2.13, 1.27, 1.51, 2.41, 1.95)
+t.test(rough, conf.level=0.95)
+```
+
+ {1.635802, 2.126198}
+
+
+## Question 13
+
+### a.
+
+```{r}
+gobi = read.csv("GOBIANTS.csv")
+mean(gobi$AntSpecies)
+median(gobi$AntSpecies)
+
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+getmode(gobi$AntSpecies)
+```
+
+### b.
+
+I would recommend the median to describe the central tendency because the mean is very high due to a couple of large outliers. 
+The mean is not an accurate representation of the data's middle ground.
+
+### c.
+```{r}
+library(dplyr)
+gob2 = within(gobi, 
+                 {reg <- ifelse(Region == "Gobi Desert", "GS","DS")
+                  reg<-factor(reg) # Make it a factor
+                 })
+
+dry = filter(gob2, reg=="DS")
+mean(dry$PlantCov)
+median(dry$PlantCov)
+getmode(dry$PlantCov)
+```
+
+## d.
+
+```{r}
+desert = filter(gob2, reg=="GS")
+mean(desert$PlantCov)
+median(desert$PlantCov)
+getmode(desert$PlantCov)
+```
+
+## e.
+
+The center of the total plant coverage does appear to be different at the two regions. The coverage in the Gobi Desert is much lower than the coverage in the Dry Steppe. 
+
+
+
+

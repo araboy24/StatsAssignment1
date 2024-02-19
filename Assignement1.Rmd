@@ -14,7 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Add Number of questions solved out of 15, X/15
+## 15/15 Questions Solved
 
 # Questions
 
@@ -257,22 +257,131 @@ According to the pie chart, there is only a 10% of chance of software having def
 
 ### Problem 2.72
 
-# Come back to 11
+# Come back to 11 a
 
 a. 
 
 ```{r}
-volt = read.csv("VOLTAGE.csv")
-head(volt)
-counts <- table(volt$VOLTAGE)
-
-# Step 2: Calculate the relative frequency for each category
-relative_freq <- prop.table(counts)
-relative_freq
-# v = 
-# hist()
+old<-subset(volt,subset=LOCATION=="OLD")
+old$VOLTAGE->vto
+vto
+max(vto)
+min(vto)
+lept<-min(vto)-0.05
+rept<-max(vto)+0.05
+rnge<-rept-lept
+inc<-rnge/9
+inc
+seq(lept, rept,by=inc)->cl
+cl
+cvto<-cut(vto,breaks=cl)
+old.tab=table(cvto)
+barplot(old.tab,space=0,main="Frequency Histogram(OLD)",las=2)
 ```
 
+
+```{r}
+# volt = read.csv("VOLTAGE.csv")
+# 
+# o_volt <- filter(volt, volt$LOCATION=="OLD")
+# 
+# breaks <- seq(8, 10.6, length.out = 10)  # 9 intervals between 8 and 10.6
+# 
+# 
+# # Create the groups
+# o_volt$Group <- cut(o_volt$VOLTAGE, breaks = breaks, labels = FALSE)
+# # breaks
+# counts <- table(o_volt$Group)
+# v <- prop.table(counts)
+# v
+# class_names <- paste("Int", 1:length(counts))
+# #
+# # # Assign names to the relative frequencies vector
+# names(relative_frequencies) <- class_names
+# #
+# # # names(v) <- counts
+# barplot(v,space=0)
+# 
+# # Step 2: Calculate the relative frequency for each category
+# # relative_freq <- prop.table(counts)
+# # relative_freq
+# # v =
+# # hist()
+```
+
+### b.
+
+```{r}
+library(dplyr)
+old_volt <- filter(volt, volt$LOCATION=="OLD")
+stem(old_volt$VOLTAGE)
+```
+
+The stem and leaf plot is more informative because it shows the specific values of the decimals. 
+
+### c.
+
+```{r}
+new<-subset(volt,subset=LOCATION=="NEW")
+new$VOLTAGE->vtn
+vtn
+max(vtn)
+min(vtn)
+lept<-min(vtn)-0.05
+rept<-max(vtn)+0.05
+rnge<-rept-lept
+inc<-rnge/9
+inc
+seq(lept, rept,by=inc)->cl
+cl
+cvtn<-cut(vtn,breaks=cl)
+new.tab=table(cvtn)
+barplot(new.tab,space=0,main="Frequency Histogram(NEW)",las=2)
+
+
+```
+
+### d.
+
+Since a voltage reading of 9.2 is the cutoff between good and bad, the voltages measured in the new location are not as good as the old ones. In the old plot, it is clear that most readings met this requirement, but in the new plot only about half of the voltages are about 9.2 volts. 
+
+### e.
+
+### ADD MODE
+
+Old:
+
+```{r}
+mean(old$VOLTAGE)
+median((old$VOLTAGE))
+# add mode
+
+```
+
+New:
+
+```{r}
+mean(new$VOLTAGE)
+median(new$VOLTAGE)
+```
+
+The best measure of central tendency is the median because it doesn't allow any potential outliers to affect its value.
+
+### f.
+
+### g.
+
+### h.
+
+### i.
+
+### j.
+
+### k.
+
+### l.
+
+### m.
 
 ## Question 12
 
